@@ -37,6 +37,7 @@ body{
 #user {
     text-align: end;
 }
+
 /*-------------------------------------------------------------*/
 #content {
     margin: 10px auto;
@@ -56,3 +57,4 @@ body{
     border-radius: 8px;
     margin-bottom: 10px;
 }
+

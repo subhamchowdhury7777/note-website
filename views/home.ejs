@@ -16,8 +16,14 @@
             <a href="">My Notes</a>
         </div>
         <div id="user">
-            <button>Sign In</button>
+            <% if (username) { %> <!-- Check if username exists -->
+                <button><%= username %></button> <!-- Display username in the button -->
+                <a href="/logout"><button>Log Out</button></a> <!-- Log Out button -->
+            <% } else { %>
+                <a href="/signIn"><button>Sign In</button></a>
+            <% } %>
         </div>
+        
     </div>
 
     <div id="content">

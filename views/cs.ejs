@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Thumbnail</title>
-<style>
-    .pdf-container {
-        width: 100%;
-        text-align: center;
-    }
-    .pdf-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    .pdf-thumbnail {
-        width: 200px; /* Adjust thumbnail size as needed */
-        height: auto;
-    }
-    .download-link {
-        display: block;
-        margin-top: 20px;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find MY-NOTEs | Computer Science</title>
+    <link rel="stylesheet" href="/style/category.css">
 </head>
 <body>
+    <div id="navbar">
+        <button id="post" onclick="toogle()">POST</button>
+    </div>
+    <div id="content">
+        <% notes.forEach(note => { %>
+            <div class="card">
+                <a href="<%= note.file_path %>" target="_blank">
+                    <!-- No Thumbnail Displayed -->
+                </a>
+                <p><%= note.title %></p>
+            </div>
+        <% }) %>
+    </div>
 
-<div class="pdf-container">
-    <h1 class="pdf-title">Your PDF Title Here</h1>
-    <img src="thumbnail.jpg" class="pdf-thumbnail" alt="PDF Thumbnail">
-    <a href="/pdf/Ramakrishnan - Database Management Systems 3rd Edition.pdf" class="download-link" download>Download PDF</a>
-</div>
-
+    <form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
+        <input type="text" name="title" placeholder="Title of The pdf" required><br>
+        <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" required /><br>
+        <button id="upload" type="submit">Upload</button>
+        <button id="cancel" type="button" onclick="hide()">Cancel</button>
+    </form>
+    <script src="/js/upload.js"></script>
 </body>
 </html>
