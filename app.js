@@ -82,6 +82,11 @@ app.get('/cs', (req, res) => {
     });
 });
 
+//Render ce.ejs
+app.get("/ce", (req, res) => {
+    res.render('ce');
+});
+
 // Handle Sign in page
 app.get("/signIn", (req, res) => {
     res.render('signIn');
