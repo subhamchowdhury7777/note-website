@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find MY-NOTEs | Electronic Engineering</title>
+    <link rel="stylesheet" href="/style/category.css">
+</head>
+<body>
+    <div id="navbar">
+        <button id="post" onclick="toogle()">POST</button>
+    </div>
+    <div id="content">
+        <% notes.forEach(note => { %>
+            <div class="card">
+                <a href="<%= note.file_path %>" target="_blank">
+                    <!-- No Thumbnail Displayed -->
+                </a>
+                <p><%= note.title %></p>
+            </div>
+        <% }) %>
+    </div>
+
+    <form action="/etcUpload" method="post" enctype="multipart/form-data" id="upload-form">
+        <h3>Add PDF to Electrical Engineering</h3>
+        <input type="text" name="title" placeholder="Title of The pdf" required><br>
+        <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" required /><br>
+        <button id="upload" type="submit">Upload</button>
+        <button id="cancel" type="button" onclick="hide()">Cancel</button>
+    </form>
+    <script src="/js/upload.js"></script>
+</body>
+</html>

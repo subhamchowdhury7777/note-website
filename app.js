@@ -82,11 +82,55 @@ app.get('/cs', (req, res) => {
     });
 });
 
-//Render ce.ejs
-app.get("/ce", (req, res) => {
-    res.render('ce');
+// Render ce.ejs
+app.get('/ce', (req, res) => {
+    const query = 'SELECT * FROM ce';
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching CS notes:', error);
+            res.status(500).send('Error fetching CS notes');
+            return;
+        }
+        res.render('ce', { notes: results });
+    });
 });
 
+// Render ee.ejs
+app.get('/ee', (req, res) => {
+    const query = 'SELECT * FROM ee';
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching CS notes:', error);
+            res.status(500).send('Error fetching CS notes');
+            return;
+        }
+        res.render('ee', { notes: results });
+    });
+});
+// Render etc.ejs
+app.get('/etc', (req, res) => {
+    const query = 'SELECT * FROM etc';
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching CS notes:', error);
+            res.status(500).send('Error fetching CS notes');
+            return;
+        }
+        res.render('etc', { notes: results });
+    });
+});
+// Render ae.ejs
+app.get('/ae', (req, res) => {
+    const query = 'SELECT * FROM ae';
+    connection.query(query, (error, results) => {
+        if (error) {
+            console.error('Error fetching CS notes:', error);
+            res.status(500).send('Error fetching CS notes');
+            return;
+        }
+        res.render('ae', { notes: results });
+    });
+});
 // Handle Sign in page
 app.get("/signIn", (req, res) => {
     res.render('signIn');
@@ -176,7 +220,86 @@ app.post('/upload', upload.single('upload'), async (req, res) => {
     });
 });
 
+// Handle file upload form submission for CE
+app.post('/ceUpload', upload.single('upload'), async (req, res) => {
+    const title = req.body.title;
+    const filePath = `/uploads/${req.file.filename}`; // Adjusted file path
+    
+    // Log path for debugging
+    console.log('Uploaded file path:', filePath);
 
+    // Insert the uploaded file's details into the database
+    const query = `INSERT INTO ce (title, file_path) VALUES (?, ?)`;
+    connection.query(query, [title, filePath], (error, results, fields) => {
+        if (error) {
+            console.error('Error uploading file:', error);
+            res.status(500).send('Error uploading file');
+            return;
+        }
+        console.log('File uploaded successfully');
+        res.redirect('/ce'); // Redirect to the cs page after successful upload
+    });
+});
+// Handle file upload form submission for ee
+app.post('/eeUpload', upload.single('upload'), async (req, res) => {
+    const title = req.body.title;
+    const filePath = `/uploads/${req.file.filename}`; // Adjusted file path
+    
+    // Log path for debugging
+    console.log('Uploaded file path:', filePath);
+
+    // Insert the uploaded file's details into the database
+    const query = `INSERT INTO ee (title, file_path) VALUES (?, ?)`;
+    connection.query(query, [title, filePath], (error, results, fields) => {
+        if (error) {
+            console.error('Error uploading file:', error);
+            res.status(500).send('Error uploading file');
+            return;
+        }
+        console.log('File uploaded successfully');
+        res.redirect('/ee'); // Redirect to the cs page after successful upload
+    });
+});
+// Handle file upload form submission for etc
+app.post('/etcUpload', upload.single('upload'), async (req, res) => {
+    const title = req.body.title;
+    const filePath = `/uploads/${req.file.filename}`; // Adjusted file path
+    
+    // Log path for debugging
+    console.log('Uploaded file path:', filePath);
+
+    // Insert the uploaded file's details into the database
+    const query = `INSERT INTO etc (title, file_path) VALUES (?, ?)`;
+    connection.query(query, [title, filePath], (error, results, fields) => {
+        if (error) {
+            console.error('Error uploading file:', error);
+            res.status(500).send('Error uploading file');
+            return;
+        }
+        console.log('File uploaded successfully');
+        res.redirect('/etc'); // Redirect to the cs page after successful upload
+    });
+});
+// Handle file upload form submission for ae
+app.post('/aeUpload', upload.single('upload'), async (req, res) => {
+    const title = req.body.title;
+    const filePath = `/uploads/${req.file.filename}`; // Adjusted file path
+    
+    // Log path for debugging
+    console.log('Uploaded file path:', filePath);
+
+    // Insert the uploaded file's details into the database
+    const query = `INSERT INTO ae (title, file_path) VALUES (?, ?)`;
+    connection.query(query, [title, filePath], (error, results, fields) => {
+        if (error) {
+            console.error('Error uploading file:', error);
+            res.status(500).send('Error uploading file');
+            return;
+        }
+        console.log('File uploaded successfully');
+        res.redirect('/ae'); // Redirect to the cs page after successful upload
+    });
+});
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);
