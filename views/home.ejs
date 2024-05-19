@@ -8,13 +8,7 @@
 </head>
 <body>
     <div id="navbar">
-        <div id="logo">
-            <a href=""><span style="color: red;">find</span> <span style="color: white; font-weight: bold;">MY-NOTEs</span></a>
-        </div>
-        <div id="links">
-            <a href="#">Notes</a>
-            <a href="">My Notes</a>
-        </div>
+
         <div id="user">
             <% if (username) { %> <!-- Check if username exists -->
                 <button><%= username %></button> <!-- Display username in the button -->
@@ -25,7 +19,9 @@
         </div>
         
     </div>
-
+    <div id="logo">
+        <a href=""><span style="color: red;">find</span> <span style="color: white; font-weight: bold;">MY-NOTEs</span></a>
+    </div>
     <div id="content">
         <a href="/cs">
             <div class="category">
